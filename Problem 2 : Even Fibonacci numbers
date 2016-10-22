@@ -1,0 +1,12 @@
+'''There is also a better way to solve this problem and you can read about that once you solve this problem'''
+
+
+m=4000000
+a=0
+b=1
+ctr=0
+while b<m:
+    a,b=b,a+b
+    if a%2==0:
+        ctr+=a
+print ctr

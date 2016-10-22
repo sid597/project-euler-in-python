@@ -1,0 +1,9 @@
+'''In this solution we have to find sum of all the numbers which are divisible 
+   by 3 or 5 or 15'''
+   
+   
+s=0
+for i in range(1001):
+  if i%3==0 or i%5==0 or i%15==0:
+    s+=i
+print s  

@@ -1,0 +1,28 @@
+l=[]
+for i in range(15):
+    l.append(map(int,raw_input().split()))
+print l
+
+
+
+def cal(l1,l2):
+    lis=[]
+    l=len(l1)
+    ctr=0
+    while ctr!=l:
+        lis.append(max(l1[ctr]+l2[ctr],l1[ctr]+l2[ctr+1]))
+        ctr+=1
+    return lis
+
+lm1=l[-2]
+lm2=l[-1]
+l.pop()
+l.pop()
+while len(l)!=0:
+    l.append(cal(lm1,lm2))
+    lm1=l[-2]
+    lm2=l[-1]
+    l=l[:-2]
+
+print l,cal(lm1,lm2)
+

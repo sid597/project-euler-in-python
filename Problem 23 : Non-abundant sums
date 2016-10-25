@@ -1,0 +1,38 @@
+def divisors(n):
+    l=[]
+    for i in xrange(2,n/2):
+        if n%i==0 and i not in l:
+            l.append(i)
+            if n//i not in l:
+                l.append(n//i)
+    return l
+l=[]
+for i in range(2,30000):
+    # print i, divisors(i),sum(divisors(i))
+    if sum(divisors(i))>i:
+        l.append(i)
+print l,len(l)
+
+
+s = set()
+for i, x in enumerate(k): #i is index of x
+    for j in k[i+1:]:
+        l = x+j #no reason to do addition twice
+        if l<28123:
+            s.add(l) #sets discard duplicates automatically
+
+print s
+
+
+o=0
+m=[]
+for i in xrange(1,28123):
+    if i not in l and i not in s:
+        print i
+        o+=i
+        m.append(i)
+print o,m
+
+
+
+http://chat.stackoverflow.com/transcript/message/33690920#33690920

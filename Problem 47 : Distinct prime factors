@@ -1,0 +1,50 @@
+# prime number generator : Sieve of eratosthenes
+
+
+def iprimes_upto(limit):
+    is_prime = [False] * 2 + [True] * (limit - 1)
+    for n in xrange(int(limit**0.5 + 1.5)): # stop at ``sqrt(limit)``
+        if is_prime[n]:
+            for i in range(n * n, limit + 1, n): # start at ``n`` squared
+                is_prime[i] = False
+    for i in xrange(limit + 1):
+        if is_prime[i]: yield i
+lis=list(iprimes_upto(1000000))
+
+# Factorisation code
+
+import math
+def primes(n):
+    primfac = []
+    ctr=0
+    d = lis[ctr]
+    while d*d <= n:
+        while (n % d) == 0:
+            if d not in primfac:
+                primfac.append(d)  # supposing you want multiple factors repeated
+                n //= d
+            else:
+                n=n//d
+        ctr += 1
+        d=lis[ctr]
+    if n > 1:
+       primfac.append(n)
+    return primfac
+print primes(1000)
+
+
+
+
+def four(num):
+    f1 = primes(num)
+    f2 = primes(num+1)
+    f3 = primes(num+2)
+    f4 = primes(num+3)
+    # print num,f1,f2,f3,f4
+    if len(f1)>=4 and len(f2)>=4 and len(f3)>=4 and len(f4)>=4:
+        return num,f1,f2,f3,f4
+
+for it in range(100000,1000000):
+    if four(it):
+        print four(it)
+        break

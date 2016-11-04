@@ -1,0 +1,92 @@
+# ctr=0
+# while ctr!=12:
+#     s=''
+#     s+=str(ctr)
+#     ctr1=0
+#     while ctr1!=12:
+#
+#             s+=str(ctr1)
+#             l.append(s)
+#
+#             ctr1+=1
+#             s=str(ctr)
+#     ctr+=1
+# print len(l),len(p)
+from collections import defaultdict
+
+
+def dict(edges):
+    g = defaultdict(list)
+    for l, r, c in edges:
+        g[l].append((c, r))
+    return g
+
+
+lo=[]
+for j in range(80):
+    lo.append(map(int,raw_input().split(',')))
+
+
+
+
+
+d=[]
+l=[]
+ctr=0
+while ctr!=80:
+    s=''
+    s+=str(ctr)
+    ctr1=0
+    while ctr1!=80:
+
+            s+=','+str(ctr1)
+            if ctr1!=79 and ctr!=79:
+                right=str(ctr)+','+str(ctr1+1)
+                rnum=lo[ctr][ctr1+1]
+                down=str(ctr+1)+','+str(ctr1)
+                dnum=lo[ctr+1][ctr1]
+                d.append((s,right,rnum))
+                d.append((s,down,dnum))
+            elif ctr1==79 and ctr!=79:
+                down = str(ctr + 1)+',' + str(ctr1)
+                dnum = lo[ctr + 1][ctr1]
+                d.append((s, down, dnum))
+            elif ctr==79 and ctr1!=79:
+                right = str(ctr)+','+ str(ctr1 + 1)
+                rnum = lo[ctr][ctr1 + 1]
+                d.append((s, right, rnum))
+
+            l.append(s)
+            ctr1+=1
+            s=str(ctr)
+    ctr+=1
+
+
+
+dic=dict(d)
+
+# print dic,len(dic)
+
+
+from collections import defaultdict
+from heapq import *
+
+def dijkstra(edges, f, t):
+    g = edges
+    q, seen = [(0,f,())], set()
+    while q:
+        (cost,v1,path) = heappop(q)
+        if v1 not in seen:
+            seen.add(v1)
+            path = (v1, path)
+            if v1 == t: return (cost, path)
+
+            for c, v2 in g.get(v1, ()):
+                if v2 not in seen:
+                    heappush(q, (cost+c, v2, path))
+    return float("inf")
+
+
+
+co,ko=dijkstra(dic, '0,0', '79,79')
+print co,ko

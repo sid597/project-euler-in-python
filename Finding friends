@@ -1,0 +1,69 @@
+
+adjacency={}
+sumdic={}
+
+
+
+d={}
+
+
+def gcd(a,b):
+    if b==0:
+        return a
+    else:
+        return gcd(b,a%b)
+
+def bfs(g,s,en):
+    parent={s:0}
+    level={s:0}
+    ctr=1
+    q=[s]
+    while q:
+        next=[]
+        for v in q:
+            for u in g[v]:
+                if u not in parent:
+                    next.append(u)
+                    parent[u]=v
+                    level[u]=ctr
+        ctr+=1
+        q=next
+    sum=0
+    child=en
+    while child!=s:
+        paren=parent[child]
+        sum+=sumdic[str(paren)+','+str(child)]
+        child=paren
+    return sum
+
+
+for i in range(int(raw_input())):
+    n,m=map(int,raw_input().split())
+    for j in range(n-1):
+        u,v,l = map(int, raw_input().split())
+        sumdic[str(u) + ',' + str(v)] = int(l)
+        sumdic[str(v) + ',' + str(u)] = int(l)
+        if u not in adjacency:
+            adjacency[u] = [v]
+        else:
+            adjacency[u].append(v)
+        if v not in adjacency:
+            adjacency[v] = [u]
+        else:
+            adjacency[v].append(u)
+
+    lis = map(int, raw_input().split())
+    sk = 0
+    ctr = 0
+    for k in lis:
+        for mat in lis[lis.index(k):]:
+            # print k, m
+            sk += bfs(adjacency, k, mat)
+            # print sk
+        ctr += 1
+    po = (m * m) / 2
+    gc = gcd(po, sk)
+    print sk/gc , po/gc
+
+    g = {}
+    d = {}

@@ -1,44 +1,48 @@
-adjacency={}
-sumdic={}
 
+adjacency = {}
+sumdic = {}
+bfg={}
 
-
-
-
-def gcd(a,b):
-    if b==0:
+def gcd(a, b):
+    if b == 0:
         return a
     else:
-        return gcd(b,a%b)
+        return gcd(b, a % b)
 
-def bfs(g,s,en):
-    parent={s:0}
-    level={s:0}
-    ctr=1
-    q=[s]
+
+def bfs(g, s):
+    parent = {s: 0}
+    level = {s: 0}
+    ctr = 1
+    q = [s]
     while q:
-        next=[]
+        next = []
         for v in q:
             for u in g[v]:
                 if u not in parent:
                     next.append(u)
-                    parent[u]=v
-                    level[u]=ctr
-        ctr+=1
-        q=next
-    sum=0
-    child=en
-    while child!=s:
-        paren=parent[child]
-        sum+=sumdic[str(paren)+','+str(child)]
-        child=paren
+                    parent[u] = v
+                    level[u] = ctr
+        ctr += 1
+        q = next
+
+    return parent ,level
+
+def path_sum(s,en) :
+    parent,level=bfg[s]
+    sum = 0
+    child = en
+    while child != s:
+        paren = parent[child]
+        sum += sumdic[str(paren) + ',' + str(child)]
+        child = paren
     return sum
 
 
 for i in xrange(int(raw_input())):
-    n,m=map(int,raw_input().split())
-    for j in xrange(n-1):
-        u,v,l = map(int, raw_input().split())
+    n, m = map(int, raw_input().split())
+    for j in xrange(n - 1):
+        u, v, l = map(int, raw_input().split())
         sumdic[str(u) + ',' + str(v)] = int(l)
         sumdic[str(v) + ',' + str(u)] = int(l)
         if u not in adjacency:
@@ -50,21 +54,27 @@ for i in xrange(int(raw_input())):
         else:
             adjacency[v].append(u)
 
+    # print adjacency, sumdic
     lis = map(int, raw_input().split())
     sk = 0
     ctr = 0
+
+    for node in lis:
+        bfg[node]=bfs(adjacency,node)
+
+
     for k in lis:
         for mat in lis[lis.index(k):]:
             # print k, m
-            sk += bfs(adjacency, k, mat)
+            sk+=path_sum(k,mat)
             # print sk
         ctr += 1
 
     po = (m * m) / 2
     gc = gcd(po, sk)
-    if gc!=0:
-        print sk/gc , po/gc
+    if gc != 0:
+        print sk / gc, po / gc
     else:
-        print 'po'
-    adjacency={}
-    sumdic={}
+        print sk, 1
+    adjacency = {}
+    sumdic = {}

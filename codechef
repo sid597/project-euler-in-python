@@ -1,10 +1,8 @@
-
 adjacency={}
 sumdic={}
 
 
 
-d={}
 
 
 def gcd(a,b):
@@ -37,9 +35,9 @@ def bfs(g,s,en):
     return sum
 
 
-for i in range(int(raw_input())):
+for i in xrange(int(raw_input())):
     n,m=map(int,raw_input().split())
-    for j in range(n-1):
+    for j in xrange(n-1):
         u,v,l = map(int, raw_input().split())
         sumdic[str(u) + ',' + str(v)] = int(l)
         sumdic[str(v) + ',' + str(u)] = int(l)
@@ -61,10 +59,12 @@ for i in range(int(raw_input())):
             sk += bfs(adjacency, k, mat)
             # print sk
         ctr += 1
-    g = {}
-    d = {}
+
     po = (m * m) / 2
     gc = gcd(po, sk)
-    print sk/gc , po/gc
-
-    
+    if gc!=0:
+        print sk/gc , po/gc
+    else:
+        print 'po'
+    adjacency={}
+    sumdic={}

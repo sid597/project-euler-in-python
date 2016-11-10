@@ -61,9 +61,10 @@ for i in range(int(raw_input())):
             sk += bfs(adjacency, k, mat)
             # print sk
         ctr += 1
+    g = {}
+    d = {}
     po = (m * m) / 2
     gc = gcd(po, sk)
     print sk/gc , po/gc
 
-    g = {}
-    d = {}
+    

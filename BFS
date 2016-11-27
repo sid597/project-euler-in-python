@@ -1,0 +1,37 @@
+def bfs1(g,s):
+    parent = {s: None}
+    level = {s: 0}
+    frontier = [s]
+    ctr = 1
+    while frontier:
+        next = []
+        for i in frontier:
+            for j in g[i]:
+                if j not in parent:
+                    parent[j] = i
+                    level[j] = ctr
+                    next.append(j)
+        frontier = next
+        ctr += 1
+    return  level
+for i in range(int(raw_input())):
+    x,y=map(int,raw_input().split())
+    print bfs1(d,x).get(y,'Impossible')
+
+
+#
+def makedic(m):
+    d = {}
+    x=None
+    for i in range(m):
+        o, p = map(int, raw_input().split())
+        x=o
+        if o not in d:
+            d[o]=[p]
+        else:
+            d[o].append(p)
+        if p not in d:
+            d[p]=[o]
+        else:
+            d[p].append(o)
+    return d,x

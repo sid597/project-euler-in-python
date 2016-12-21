@@ -1,0 +1,27 @@
+def lychrel(n):
+    ctr=0
+    f=False
+    while ctr<51 and f==False:
+        n=n+int(str(n)[::-1])
+        if n==int(str(n)[::-1]):
+            f=True
+        else:
+            ctr+=1
+    return f
+# print lychrel(349)
+
+ptr=0
+le=[]
+for i in range(10,10001):
+    if i!=int(str(i)[::-1]):
+        l=lychrel(i)
+        if l==False:
+            ptr+=1
+            le.append(i)
+    else:
+        l = lychrel(i)
+        if l == False:
+            ptr += 1
+            le.append(i)
+            print i
+print ptr,le

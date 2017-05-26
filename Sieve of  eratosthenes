@@ -14,14 +14,22 @@ def primes_up_to(x):
 
 """
 
-    l = [True]*x                       # A boolean list to store all probable prime
-    for num in xrange(2, int(x**0.5 + 1.5)):   # For numbers in range 2 to sqrt(x)
-        if l[num]:                         # If num is prime
+    l = [True]*x                       
+    # A boolean list to store all probable prime
+
+    for num in xrange(2, int(x**0.5 + 1.5)):   
+        # For numbers in range 2 to sqrt(x) + 1.5
+       
+       if l[num]:                         
+            # If num is prime
             yield num
             for j in xrange(num, x, num):
-                l[j] = False           # Mark all of its multiples False
+                l[j] = False           
+                # Mark all of its multiples False
+    
     for i in xrange(2, x):
-        if l[i]:                 # If prime then yield it
+        if l[i]:                 
+            # If prime then yield it
             yield i
 k = list(primes_up_to(20))
 

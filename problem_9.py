@@ -1,6 +1,6 @@
 '''
 This is brute force solution with O(n**3) complexity
-the three nos are 200,375,425
+the three numbers are 200,375,425
 '''
 
 for i in range(1,1000):

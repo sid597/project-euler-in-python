@@ -1,0 +1,3 @@
+'''
+Use Sieve of Eratosthenes
+'''

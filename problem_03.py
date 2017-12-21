@@ -24,12 +24,3 @@ for i in l:
 
 print divisors
 print divisors[-1]
-
-
-
-
-
-
-
-
-

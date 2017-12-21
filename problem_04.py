@@ -7,3 +7,4 @@ for i in range(100,999):
             print i,k,n
 
 print sorted (l),len (l)
+#

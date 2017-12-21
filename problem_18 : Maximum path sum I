@@ -25,4 +25,3 @@ while len(l)!=0:
     l=l[:-2]
 
 print l,cal(lm1,lm2)
-
